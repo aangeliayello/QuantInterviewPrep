@@ -32,4 +32,33 @@ For simplicity say the semicircle starting from p1 contantains all the points. T
 
 #### Poker Hands
 
-**Probability of 4 of a kind:**
+Number of hands with of 4 of a kind:
+(Ways to choose the number of the 4 of a kind) * (Ways to chose that 4 of a kind) = 13 * 48 
+
+Number of hands with a Full house
+(Ways to choose the tripe) * (wats to choose the the suits of the triple) * (ways to choose the pair) * (ways to choose the suits of the pair) 
+13 * (4 choose 3) * 12 * (4 choose 2)
+
+Number of hands with two pairs: 
+We can use the same approach as above with one consideration. Since the trip and the pair are different the approach works because triple of K and pair of Q is not the same as a trip of Q and a pair of K. In this case we would be double countin the pairs, since a pair of K and Q is the same as a pair of Q and K. Thus, we have
+
+13 * 12 / 2 * (4 choose 2) * (4 choose 2) 
+
+This is equivalent to 
+
+(13 choose 2) * (4 choose 2) * (4 choose 2)
+
+#### Hopping Rabits
+
+Say we want to calcute the different ways to go up the stair with n steps but we already calculated it for 1, 2, ..., n-1 then the first move can either be a 2-hop or a 1-hop. If it is a 1-hop the remaining ways from there is the same as the n-1 steps stair and if we do a 2-hop the remaining ways from there is the same as the n-2 steps stair, thus, we have a fibonaci sequence patter where 
+$$f_n = f_{n-1} + f_{n-2}$$
+
+### Screwy Pirates 2
+
+https://math.stackexchange.com/questions/581461/what-is-the-minimum-number-of-locks-on-the-cabinet-that-would-satisfy-these-cond
+
+### Chess Tournament
+This one is easy if we use the right approache, since it is a knockout tournatment there are two branches of the tree, and if 1 and 2 are in different branches then they will meet in the final. Thus, the probability of 2 being in the different branch to of 1 is 
+$$\frac{2^{n-1}}{2^{n} - 1}$$
+So, just lightly aboth 1/2 for big values of $n$. 
+
