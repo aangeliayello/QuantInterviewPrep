@@ -106,7 +106,80 @@ TODO
 
 ### Question 3.4. We play a game: I pick a number $n$ from 1 to 100. If you guess correctly, I pay you $n$ and zero otherwise. How much would you pay to play this game?
 
-In reality here we can't assume randomness since the host would be biased to choose small numbers. 
+First, we need to assume that the strategies are known to both players. Then, it follows that no deternimistic strategy from the host will be successfull since it can be always countered.
+
+Now, we have that the choosing strategy needs to be random. Then the strategy will have the following form 
+$$P(b_i) = p_i\ where \sum p_i = 1$$
+
+Then, we need to decide how to distribute the probabilities. If we assume we only have two boxes with values $a$ and $b$. Then, we conjecture that the best strategy is 
+$$p_a = \frac{1/a}{d};\ \ p_b = \frac{1/b}{d};\ \ d = 1/a+1/b$$
+
+Then, the payoff for the player if it always plays $a$ or always plays $b$ is on average $1/d$. Thus, any other mix of trategies will also pay $1/d$.
+
+Now assume we use $p_a'$ and $p_b'$ where $p_a' < p_a$, and respectively $p_b' > p_b$. Then, the strategy of playing only $b$ would pay more tha $1/d$. We can see (handwavevly) that any other distribution of probabilities would be better for the player, thus, since it is ta zero-sum game the host will go for the initial probability distribution of $p_i \propto 1/i$.
+
+Then, if with assume this strategy it follows that the payoff is 
+$$\frac{1}{D}\ where\ D = \sum^{100}_{i=1}1/i$$
+
+#### What if you receive the number squared?
+Note that the arguments where agnostic of the actual value of the boxes, thus, the same reasoning follows and we have a payoff of 
+$$\frac{1}{D'}\ where\ D' = \sum^{100}_{i=1}1/i^2$$
+
+#### Why should the value decrease as the number of numbers increases?
+
+In general we have the form of the payoff for $n$ boxes as follow
+
+$$\frac{1}{D^*}\ where\ D^* = \sum^{n}_{i=1}1/i^2$$
+
+And, sind $D^*$ is increasing in $n$ it follows that the payoff is decreasing in $n$. 
+
+Note that for the case of non-squared payoff the value of the game will aproach zero since the sum of the harmonic series will diverge. But for the square case it will converge!
+
+### Question 3.5. Suppose you have a fair coin. You start with a dollar, and if you toss a H, your position doubles, if you toss a T, your position halves. What is the expected value of the money you have if you toss the coin infinitely?
+
+Given that the tosses are independent the question reduces to findig the expected value of the first toss since. 
+
+$$E(X_1 \cdot X_2 \cdot \dots \cdot X_n) = \prod E(X_i)$$
+for independent $X_i$. Since $E(X_1) = 5/4$, it follows that 
+
+$$E\left(\prod X_i\right) = (5/4)^n$$
+
+#### Suppose your position increases by a factor of x on a $H$ instead of 2. Classify the long term behaviour as a function of x.
+
+The general form is
+$$E(X_1) = \frac{1}{2} \left( 1/x + x\right)= \frac{x^2 + 1}{2x}$$
+
+$$E\left(\prod X_i\right) = \left(\frac{x^2 + 1}{2x}\right)^n$$
+
+Then, the behavior of the expectactions depends on the relationship between $x^2 + 1$ and $2x$. 
+
+When we solve the equation 
+
+$$x^2 - 2x + 1 = (x - 1)^2=0$$
+
+we have that the only zero is at 1. And $x^2 + 1$ is never less than $2x$ (this also follows from the inverse symentry of x and 1/x).
+
+So the long term behavior is divergence to infinity for $x > 1$, and static at 1 for $x = 1$
+
+#### Suppose your position increases by a factor of x on a H and is multiplied by y with y < 1 otherwise. Classify the long term behaviour as a function of x and y.
+
+$$E(X_1) = \frac{x+y}{2}$$
+
+$$E\left(\prod X_i\right) = \left(\frac{x+y}{2}\right)^n$$
+
+Thus, it follows that 
+
+$$E\left(\prod X_i\right) = \left(\frac{x+y}{2}\right)^n$$
+
+$$
+    E\left(\prod X_i\right) = 
+    \begin{cases}
+        0, & \text{for } x+y<2\\
+        1, & \text{for } x+y=2\\
+        \infty, & \text{for } x+y>2 
+    \end{cases}
+$$
 
 
-
+### 3.6. Suppose we toss a fair coin, and let N denote the number of
+tosses until we get a head (including the final toss). What is E(N) and Var(TV)?
