@@ -380,5 +380,26 @@ But, the question is not
 #### What is the probability of getting at least one sequence of six heads followed by six tails? (very hard!)
 
 
-### Question 3.12. You throw a fair coin one million times. What is the expected number of strings of 6 heads followed by 6 tails?
+### Question 3.14. A woman has two babies. One of them is a girl, what is the probability that the other is a boy?
 
+$$P(B=1 | G\geq 1) = P(B=1\cap G\geq 1)/P(G\geq 1)$$
+$$0.5/0.75 = 2/3$$
+
+#### A dictator decides that to increase the number of sons in his realm, a family that has had a girl is allowed no more children. Would this work?
+
+Intuitively we can see that every children as equal probability being a boy or a girl, thus, doesn't really matter the stopping condition that you have place the expected ratio will always be 50/50. 
+
+You can all think it in the sense of a martingale. Let $D_i$ be the difference $B-G$ after the ith children of the family. Then, $D$ is a martingale, thus, $D_\tau$ where $\tau$ is the stopping time has expectation zero as well. 
+
+Now assume every couple have a target number of children that the will have but if they have a girl before they reach their target then they will be having less children. 
+
+So, if the goal is absolute numbers then it is counter productive since it would reduce the total number of children. And, since we already "showed" that the ration is expected to be balance it follows that the total number of boys is also reduced. 
+
+#### Suppose there are three children, what's the probability all three are girls if one is?
+$$P(G = 3 | G\geq 1) = \frac{P(G = 3 \cap G \geq 1)}{P(G \geq 1)} = \frac{1/8}{1 - 1/8} = 1/7$$
+
+#### Suppose there are three children, what's the probability all three are girls if the middle child is a boy?
+Clearly it is zero with both events are mutually exclusive. 
+
+#### Suppose there are three children, what's the probability that two are girls if the middle child is a boy?
+This is simply 1/4.
