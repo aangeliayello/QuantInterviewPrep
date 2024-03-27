@@ -1,4 +1,7 @@
 # Quant Job Interview Notes
+*Let $\epsilon$ approach $\infty$*
+
+
 ## Intro
 
 ## Option Pricing
@@ -22,14 +25,14 @@ If we assume they are independent the $E(D_1) + E(D_2) \equiv 2*E(D) = 7$
 Lets vizualize the rolls of the two dices on a 2d matrix with labes 1-6 as rows and colums denoting the row of the first and second die respectively. Then, we can see that the sum of the indices is equial to 7 in the anti-diagonal. Thus, out of the 36 possible outcomes 6 add up to 7. Therefor the probability is 1/6.
 
 
-|      | **1** | **2** | **3** | **4** | **5** | **6** |
-|---|---|---|---|---|---|---|
-| **1** |  2  |  3  |  4  |  5  |  6  |  7  |
-| **2** |  3  |  4  |  5  |  6  |  7  |  8  |
-| **3** |  4  |  5  |  6  |  7  |  8  |  9  |
-| **4** |  5  |  6  |  7  |  8  |  9  | 10  |
-| **5** |  6  |  7  |  8  |  9  | 10  | 11  |
-| **6** |  7  |  8  |  9  | 10  | 11  | 12  |
+|       | **1** | **2** | **3** | **4** | **5** | **6** |
+| ----- | ----- | ----- | ----- | ----- | ----- | ----- |
+| **1** | 2     | 3     | 4     | 5     | 6     | 7     |
+| **2** | 3     | 4     | 5     | 6     | 7     | 8     |
+| **3** | 4     | 5     | 6     | 7     | 8     | 9     |
+| **4** | 5     | 6     | 7     | 8     | 9     | 10    |
+| **5** | 6     | 7     | 8     | 9     | 10    | 11    |
+| **6** | 7     | 8     | 9     | 10    | 11    | 12    |
 
 
 ### Question 3.2. Suppose we play a game. I roll a die up to three times. Each time I roll, you can either take the number showing as dollars, or roll again. What is your expected winnings?
@@ -181,5 +184,201 @@ $$
 $$
 
 
-### 3.6. Suppose we toss a fair coin, and let N denote the number of
-tosses until we get a head (including the final toss). What is E(N) and Var(TV)?
+### 3.6. Suppose we toss a fair coin, and let N denote the number of tosses until we get a head (including the final toss). What is $E(N)$ and $Var(N)$?
+
+This is a geometric random variable, but lets derive the figures from scratch. Let $p$ be the probability of the coin landing heads. 
+
+$$P(N=0) = 0$$
+$$P(N=1) = p$$
+$$P(N=2) = p(1-p)$$
+$$P(N=n) = p(1-p)^{n-1} for\ n\geq1$$
+
+$$E(N) = \sum_{n=0}np(1-p)^{n-1}$$
+$$E(N) = p \frac{d}{dp}\left(-\sum_{n=0}(1-p)^{n}\right)$$
+$$E(N) = p \frac{d}{dp}\left(-\sum_{n=0}(1-p)^{n}\right) = p /p^2 = 1/p$$
+
+Deriving this I am realizing that I am not fully convienced by the integral/derivative argument. 
+
+Let's use a cleaner argument
+
+$$E(X) = pE(X| X_1 = H) + (1-p)E(X|X_1 = T) $$
+$$= p\cdot1 + (1-p)(E(X) +1) = 1/p$$
+
+Similarly 
+
+$$E(X^2) = pE(X^2| X_1 = H) + (1-p)E(X^2|X_1 = T) $$
+$$= p\cdot1 + (1-p)\Bigl(E(X^2) + 2E(X)+1\Bigr) = \frac{1-p}{p^2}$$
+
+So, now we just plug $p:= 1/2$ to get $E(X) = 2$ and $Var(X) = 2$.
+
+#### I pay you $1 at the end of this year, $2 at the end of next year and so on. The effective annual interest rate is i. Derive, from first principles, the value of this payment stream.
+
+TODO
+
+#### Derive the expectation and variance of a random variable with a Poisson distribution.
+
+TODO
+
+#### What is the mean and expectation if we redefine N to be the number of tails before we toss a head?
+
+We note that the random variable $Y$ follow $Y\simX-1$. Thus, $Var(Y)$ is the same, and $E(Y) = \frac{1-p}{p}$.
+
+### Question 3.7. We play a game, with a fair coin. The game stops when either two heads (H) or tails (T) appear consecutively. What is the expected time until the game stops?
+
+This should be solvabable by breaking down the expected value into conditional events.
+
+Let $P(H) = p$ and $P(T) = q = (1-p)$
+
+$$E(X) = pE(X|[TH]) + qE(X|[HT])$$
+
+$$E(X|[TH]) = pE(X|[HH]) + qE(X|[HT])$$
+
+$$E(X) = p[p + qE(X|[HT])] + qE(X|[HT])$$
+
+
+$$\begin{aligned} 
+E\left(X\right) & =p^2(E(X|HH)+1) \\ 
+& + p^2(E(X|HH)+2) \\ 
+& + q^2(E(X|TT)+2) \\
+& + pq(E(X|HT)+2) \\
+& + pq(E(X|TH)+2) \\
+\end{aligned}$$
+
+$$\begin{aligned} 
+E\left(X|HT\right) & =p(1+ E(X|TH)) + q & = pE(X|TH) + 1\\ 
+E\left(X|TH\right) & =p + q(1+ E(X|HT)) & = qE(X|HT)  + 1\\ 
+\end{aligned}$$
+ 
+and from the above pair of equations it follows that 
+$$\begin{aligned} 
+E\left(X|HT\right) & =\frac{1+p}{1-pq} \\ 
+E\left(X|TH\right) & =\frac{1+p}{1-pq}  \\ 
+\end{aligned}$$
+
+
+$$E(X) = 2p^2 + 2q^2 + pq(4 + \frac{3}{1-pq})$$
+
+and if we plug $p=q=1/2$ we get $E(X)=3$.
+
+
+#### What is the variance of N?
+TODO:\
+I did the derivation in the sumation form an it gets pretty nasty, wondering if there is a cleaner approach.
+
+#### How is the expectation changed if we alter the game so we need three consecutive occurrences of either heads or tails to end the game?
+TODO
+
+### Question 3.8. For a fair coin, what is the expected number of tosses to get three heads in a row?
+TODO
+
+### Question 3.9. You toss a biased coin. What is the expected length of time until a head is tossed? For two consecutive heads?
+
+See Question 3.7, it should be a straight fwd addaptation.
+
+### Question 3.10. I have a bag containing nine ordinary coins and one double-headed one. I remove a coin and flip it three times. It comes up heads each time. What is the probability that it is the double-header?
+
+We are asked to caculte the following conditional probability. Let $dp$ and $rc$ denote the events of grabing a double-side or a regular coin respectively.
+
+$$\begin{aligned} 
+P(dh | HHH) &= \frac{P(dh \cap HHH)}{ P(HHH) }\\ 
+&= \frac{P(dh)}{\left( P(dh) + 1/8 P(rc) \right)  }  \\ 
+\end{aligned}$$
+
+Thus, for this set up we get
+$$\begin{aligned} 
+P(dh | HHH) &= \frac{1/10}{\left( 1/10 + 1/8\cdot 9/10 \right)  } = \frac{8}{17} \\ 
+\end{aligned}$$
+
+
+#### What if there are two double-headed coins?
+For this we use the expresion above but use $dh \rightarrow 2/10$ and $rc \rightarrow 8/10$.
+
+$$\begin{aligned} 
+P(dh | HHH) &= \frac{2/10}{\left( 2/10 + 1/8\cdot 8/10 \right)  } = \frac{16}{24} \\ 
+\end{aligned}$$
+
+We note that the denominator gained 7 and the denominator gained 8. It is the case for the next step as well? With out calculating it makes sense after 10 rounds (8 more) the numberator would catch up with the denominator and have $$P(dh | HHH)  = 1$$ (since all conins are double-headed).
+
+Turns out it is the case indeed. Let $n$ be the number of double-headed coins then the generic form is 
+
+$$\begin{aligned} 
+P(dh | HHH) &= \frac{8n}{10+7n}
+\end{aligned}$$
+
+#### How many tosses would you need to be 95% sure that the coin is double-headed?
+
+**INTERESTING_QUESTION**
+
+Instictively, I am woundering if I can massage the problem and use some normallity distribution properties.
+
+Let's formalize the problem first. Let $H_k$ denote the event of $n$ heads flipped in a row. Then, the question is what is the smallest $n$ such that 
+
+$$P(dh | H_k) > 0.95$$
+
+Now that the problem is formallized it doesn't look as intimidating... Thus, lets tacket the generalization; let $p$ the probability of heads, $n$ the number of double-headed coins and $m$ the number of regular coin. 
+
+$$
+\begin{aligned}
+P(dh | H_k) &= \frac{\frac{n}{n+m}}{\frac{n}{n+m} + p^{k}\frac{m}{n+m}}\\
+&= \frac{p^{-k}{n}}{p^{-k}{n}+ {m}}
+\end{aligned}
+$$
+
+
+$$
+\begin{aligned}
+P(dh | H_k) &= \frac{2^{k}}{2^{k}+ {9}}
+\end{aligned}
+$$
+
+
+$$
+\begin{aligned}
+\frac{2^{k}}{2^{k}+ {9}} = \alpha\\
+2^{k}(1-\alpha) = 9\alpha  \\
+k = log_2\left(\frac{9\alpha}{1-\alpha} \right)
+\end{aligned}
+$$
+
+
+$$
+\begin{aligned}
+\frac{2^{k}}{2^{k}+ {9}} = \alpha\\
+2^{k}(1-\alpha) = 9\alpha  \\
+k \approx log_2\left(9*20 \right) \in (7, 8)
+\end{aligned}
+$$
+
+Thus, we would need 8 throws
+
+
+### Question 3.11. I take an ordinary-looking coin out of my pocket and flip itthree times. Each time it is a head. What do you think is the probability that the next flip is also a head? What if I had flipped the coin 100 times and each flip was a head?
+TODO
+
+
+### Question 3.12. You throw a fair coin one million times. What is the expected number of strings of 6 heads followed by 6 tails?
+
+Important thing to note here that eventhough is that we don't have to bother about the overlap.
+
+(Stolen from the solutions) Let $I_j$ be the indicator that is 1 if the sequece started in the $jth$ position. Then,
+
+$$E(X) = E\left(\sum I_j\right) = \sum E\left(I_j\right)$$
+
+There are 1000000-11 $I_j$'s thus we have
+
+$$E(X) = \frac{10^6 - 11}{2^{12}}$$
+
+#### What is the expected number of sequences of six tails, if we do not allow overlaps?
+Not fully sure if this is correct but we can recycle the previous argument. 
+
+If we would allow overlaps then we would have 
+
+$$E(X) = \frac{10^6 - 5}{2^{6}}$$
+
+But, the question is not 
+
+#### What is the probability of getting at least one sequence of six heads followed by six tails? (very hard!)
+
+
+### Question 3.12. You throw a fair coin one million times. What is the expected number of strings of 6 heads followed by 6 tails?
+
