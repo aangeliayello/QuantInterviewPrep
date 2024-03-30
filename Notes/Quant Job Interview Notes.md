@@ -403,3 +403,38 @@ Clearly it is zero with both events are mutually exclusive.
 
 #### Suppose there are three children, what's the probability that two are girls if the middle child is a boy?
 This is simply 1/4.
+
+### Question 3.16. What is the probability that the fourth business day of the month is Thursday?
+Add 5 business days start with 1/7 chance of being the ith business in a month. Now, the questions is to which day we allocate the extra 2/7th coming from the weekend. 
+
+$$\begin{aligned}
+1st \rightarrow Mon\\
+2nd \rightarrow Tue\\
+3rd \rightarrow Wed\\
+4th \rightarrow Thu\\
+5th \rightarrow Fri\\
+\end{aligned}
+$$
+
+Thus, thursday with have a 3/7 of being the 4rth business day of the month. 
+
+#### An event happens on business day k of the month. We want to minimise the number of times it happens on a Monday. What k do we choose? (We prefer smaller k if equal probability.)
+
+Recycling the logic from above we have that 2, 3, 4, and 5 would give us 1/7 for monday. Thus, we brake ties and choose the 2nd business of the month. 
+
+#### What is the probability that the third of January 2011 is a business day?
+
+It is either zero or one since it is a deterministic event. 
+
+#### What day of the week should we pick something to happen to minimise it happening on the fourth business day of the month?
+We established that Thursday has the highest change to be the 4th business day of the month. Thus, anyother day should satisfy. 
+
+We can start thinking about the distribution of holidays and go deeper in the estimation. 
+
+### Question 3.17. You are playing Russian Roulette. There are precisely two bullets in neighbouring chambers of the six shooter revolver. The barrel is spun. The trigger is pulled and the gun does not fire. You are next, do you spin again or pull the trigger?
+
+Bullets are heavy so they are likely to be in the bottom. But, lets ignore these. 
+
+For starters the probability of having a bullet after a spin in 1/3. But, since they are consecutive it means that there are four empty chamber and only one of them has a bullet next. Thus, the chances of getting a bullet without a respin is 1/4. Thus, not respining the the correct way to go.
+
+In general, we can see that if the revolver was 3 chambers then we respin, 4 we are indifferent and 5 and up we do not respin
