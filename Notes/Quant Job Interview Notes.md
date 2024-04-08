@@ -340,7 +340,6 @@ k = log_2\left(\frac{9\alpha}{1-\alpha} \right)
 \end{aligned}
 $$
 
-
 $$
 \begin{aligned}
 \frac{2^{k}}{2^{k}+ {9}} = \alpha\\
@@ -437,4 +436,160 @@ Bullets are heavy so they are likely to be in the bottom. But, lets ignore these
 
 For starters the probability of having a bullet after a spin in 1/3. But, since they are consecutive it means that there are four empty chamber and only one of them has a bullet next. Thus, the chances of getting a bullet without a respin is 1/4. Thus, not respining the the correct way to go.
 
-In general, we can see that if the revolver was 3 chambers then we respin, 4 we are indifferent and 5 and up we do not respin
+In general, we can see that if the revolver has 2 bullets and has 3 chambers then we respin, 4 we are indifferent and 5 and up we do not respin
+
+$$P(Death respin) = \frac{Bullets}{Chambers}$$
+$$P(Death no-respin) = \frac{1}{Chambers - Bullets}$$
+
+2b 3c: 
+dr = 2/3
+dnr = 1
+
+2b 4c:
+dr = 2/4
+dnr = 1/2
+
+2b 5c:
+dr = 2/5
+dnr = 1/3
+####  How do the odds change if we load three contiguous chambers?
+Using the above generalization we have 
+
+$$P(Death respin) = \frac{3}{6} = 1/2$$
+$$P(Death no-respin) = \frac{1}{6 - 3} = 1/3$$
+
+Then, we would still not resping since we have a survival change of 2/3 instead of 1/2. 
+
+#### What if there are three rounds in alternating chambers?
+
+Then, we would always respin since after every empty chamber it follows a bullet. 
+
+### Question 3.18. Consider a deck of 52 cards, ordered such that A > K > Q > ... > 2. I pick one first, then you pick one, what is the probability that my card is larger than yours?
+
+If it is not a tie, then we know it is 50/50. So, we just have to calculate the probability of a tie, which is 3/51. Thus, we have 
+
+$$P(C_2 > C_1) = 1/2 * (1 - 3/51) = 24/51$$
+
+#### What is the probability that the second card has the same suit? 
+
+There are 51 cards remaining and 12 of the same suit, thus, we have 12/51.
+
+#### Suppose one suit is a trump suit. What is the probability that the second card would beat the first card in a trick? (i.e. it is a trump and the first card is not, or it is higher than the first card and in the same suit.)
+
+Intuitively the same principle follows. If they are not a tie, then it is 50/50. Now the probability of a tie is smaller. 
+
+$$
+\begin{aligned}
+P(tie) = & P(tie | trump)P(trump) + P(tie | non-trump)P(non-trump)
+= & 0 + 2/51 * 3/4 = 1/34
+\end{aligned}
+$$
+
+$$P(C_2 > C_1) = 1/2 * (1 - 1/34) = 33/68 $$
+
+
+### Question 3.19. Suppose 2n teams participate in a championship. Once a team loses, it is out. Suppose also that you know the ranking of teams in advance and you know that a team with a higher rank will always win the game with a team of lower rank. In the beginning, all teams are randomly assigned to play with each other. What would be the probability that in the final, the best team will play the second best?
+
+Since we know the better team always wins then it follows that the best and second-best will meet in the final if-and-only-if they don't meet before. 
+
+The probability that they don't meat is that they are in different 'half's of the tourney. 
+
+$P(different halfs) = \frac{2^n/2}{2^n - 1}$
+
+So, it is slight more than 50%.
+
+#### There are M teams in a knock-out tournament. How many matches must be played to determine who wins?
+
+Since every match eliminates one player it follows that we need to eliminate $M-1$ playres, thus, we need $M-1$ matches.
+
+#### There are M teams in a knock-out tournament. How many rounds must be played to determined who wins? (A round means any number of simultaneous matches with a team in a maximum of one match.)
+If we assume a binary tree structure, then we will need $log_2(M)$ rounds. 
+
+### Question 3.20. A drawer contains 2 red socks and 2 black socks. If you pull out 2 socks at random, what's the probability that they match.
+Wlog, assume we take a red sock, then the probability of the second sock being red is 1/3.
+
+#### What if there were n different colours and you pull out two?
+We are still assuming that there are 2 socks per color. Again, wlog we assume to pulled a $c_1$ sock. Then, the probability of pulling the snd one is 1/(2n - 1)
+
+#### What if there were n different colours and you pull out three?
+First, we see that there are two ways of getting a pair. Label the colors $C_1, ..., C_n$. Without loss of generality again let $C_1$ be always the same pull. 
+
+- A: $C_1, C_1, C_i$
+- B: $C_1, C_i, C_i$
+- C: $C_1, C_i, C_1$
+
+$P(A) = 1/(2n-1)$
+$P(B) = \frac{2n-2}{2n-1} \frac{1}{2n-1} = 1/(2n-1)$
+$P(C) = \frac{2n-2}{2n-1} \frac{1}{2n-1} = 1/(2n-1)$
+
+Thus, since A, B, and C are mutually exclusive it follows that the probability of a pair is 3/(2n-1)
+
+#### If there are 20 red socks and 20 black socks in a drawer, how many would you have to pull out to be sure of having a matching pair? (the answer is not 21.)
+
+3
+
+### Question 3.21. If I draw two cards from an ordinary deck with replacement, what is the probability that they are both aces? Without replacement?
+
+**With replacement**
+Replacement makes the draws independent, thus, we need to calculate the probability of drawing and aces and square it
+
+$$P(AA) = P(A)^2 = (4/52)^2 = (1/13)^2 = 169$$
+
+**Without replacement**
+
+$$P(AA) = P(A) * P(A | A already pulled) = 1/13 * 3/51 = 1/221$$
+
+#### What's the probability I am dealt two aces at Pontoon?
+Same logic folllows we just need to add 2 (for the jokers in deck) to the denominators. 
+
+#### What's the probability of getting 3 aces with and without replacement?
+We proceed on the same fashion
+
+With replacement: $1/13^3$
+
+Without replacement: $1/221 * 2/50$
+
+#### What's the probability of getting an ace and a king without replacement?
+
+By symmetry we can assume we first get an ace and then multiply our result by 2, since the same logic would follow if we get a K first.
+
+$$P(AK) = 2 * P(A) * P(K | A already pulled) = 2* 1/13 * 4/51 $$
+
+### Question 3.22. Suppose we have an ant traveling on edges of a cube, going from one vertex to another. The ant never stops and it takes him one minute to go along one edge. At every vertex, the ant randomly picks one of the three available edges and starts going along that edge. We pick a vertex of the cube and put the ant there. What is the expected number of minutes that it will take the ant to return to that same vertex?
+
+Let *a* be our vertex, *b* the vertices that are distance 1 from *b*, and *c* and *d* distance 2 and 3 respectively. 
+
+Then we have,
+- a = 1 + b
+- b = 1 + 2/3c
+- c = 1 + 2/3b + 1/3d
+- d = 1 + c
+
+then we get *b = 7* and *a = 8*.
+
+#### Instead of constantly moving, the ant gets tired and rests for one minute with probability 1/4. What is the new expected time?
+
+Based, on the previous answer we would have to add on average 1/4 of a minute per move but not that on the last move we dont need the extra quarter. So we have 8 + 7/4. 
+
+#### Repeat the question assuming the ant is walking on a regular tetrahedron.
+
+For this case is easier 
+- a = 1 + b 
+- b = 1 + 1/3
+it follows that b in 3 and a is 4. 
+
+### You have been captured and blindfolded by pirates, then placed somewhere on a five-meter-long wooden plank. Disorientated, each step you take is a meter long but in a random direction - either toward the sharks waiting at one end or eventual freedom at the other. If x (integer) is the distance in meters you start from the safe end, determine the probability of your survival as a function of x.
+
+To formalize the problem, there are 6 positions, 0, 1, ..., 5, where position zero means safety and 5 means water. Thus, we proceed to stated the boundary conditions of 
+
+$$P_0 = 1; P_5 = 0$$
+
+And, then we have the following of $i\in \{1, 2, 3, 4\}$
+
+$$P_i = 1/2 P_{i-1} + 1/2 P_{i+1}$$
+
+
+We can solve the generic case with a board of $N$ meters and proof the result using induction. We get
+
+$$P_i = \frac{N-i}{N}$$
+
